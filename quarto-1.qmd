@@ -7,10 +7,10 @@ execute:
 ---
 
 
-
 ```{r}
-library(tidyverse)
-library(palmerpenguins)
+
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(palmerpenguins))
 
 ```
 
@@ -20,6 +20,13 @@ library(palmerpenguins)
 # Load required packages
 library(tidyverse)
 library(palmerpenguins)
+penguins_clean <- penguins %>%
+  filter(
+    !is.na(flipper_length_mm),
+    !is.na(body_mass_g),
+    is.finite(flipper_length_mm),
+    is.finite(body_mass_g)
+  )
 
 # Create the scatter plot with additional geoms
 ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
